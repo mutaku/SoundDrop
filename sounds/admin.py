@@ -69,8 +69,10 @@ class ClipAdmin(admin.ModelAdmin):
     
     form = ClipForm
     fieldsets = [
-        ('Recording', {'fields':['title', 'location', 'record_date', 'description', 'taglist', 'name']})
+        ('Recording', {'fields':['title', 'record_date', 'location', 'description', 'taglist', 'name']})
     ]
-    raw_id_fields = ('location',) 
+    #raw_id_fields = ('location',)
+    filter_horizontal = ('location',)
  
 admin.site.register(Clip, ClipAdmin)
+admin.site.register(Location)

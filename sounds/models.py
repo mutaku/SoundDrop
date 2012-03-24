@@ -10,7 +10,7 @@ class Clip(models.Model):
     title = models.CharField('Name', help_text='Choose a name for clip', max_length=75)
     record_date = models.DateTimeField('Date recorded', help_text='Indicate date of recording')
     location = models.ManyToManyField('Location', help_text='Indicate location(s) represented in clip.')
-    user = models.ForeignKey('User', editable=False,)
+    user = models.CharField('User', editable=False, max_length=20)
     tags = models.ManyToManyField('Tags')
     description = models.TextField('Description', help_text='Describe recording for searchable reference', null=True)
     
@@ -25,19 +25,11 @@ class Clip(models.Model):
 
 class Location(models.Model):
     '''Recording locations.'''
-    city = models.CharField('City', max_length=30)    
+    city = models.CharField('City', help_text='Enter city', max_length=30)    
     
     def __unicode__(self):
         '''Return location when unicode is requested.'''
         return u"%s" % self.city
-
-class User(models.Model):
-    '''User information.'''
-    name = models.CharField('Name', max_length=20,)
-    
-    def __unicode__(self):
-        '''Return name when unicode is requested.'''
-        return u"%s" % self.name
 
 class Tags(models.Model):
     '''Tags to associate with clips.'''

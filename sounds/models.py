@@ -7,9 +7,8 @@ from django.db import models
 
 class Clip(models.Model):
     '''Recorded clip elements.'''
-    filebits = models.ForeignKey('FileElement')
-    date = models.DateTimeField('Date uploaded', auto_now=True,)
-    location = models.ForeignKey('Location')
+    title = models.CharField('Name', max_length=75)
+    upload_date = models.DateTimeField('Date uploaded', auto_now=True,)
     user = models.ForeignKey('User')
     tags = models.ManyToManyField('Tags')
     description = models.TextField('Description')
@@ -20,6 +19,7 @@ class Clip(models.Model):
 
 class FileElement(models.Model):
     '''Physical file container.'''
+    clip = models.ForeignKey('Clip')
     name = models.FileField('File name', upload_to='recordings/%Y/%m/%d',)
     size = models.IntegerField('File size')
     length = models.IntegerField('File length')
@@ -30,6 +30,7 @@ class FileElement(models.Model):
 
 class Location(models.Model):
     '''Recording locations.'''
+    clip = models.ForeignKey('Clip')
     city = models.CharField('City', max_length=30)    
     
     def __unicode__(self):

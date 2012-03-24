@@ -2,7 +2,7 @@
 #
 # -*- coding: utf_8 -*-
 
-from sounddrop.models import *
+from sounds.models import *
 from django.contrib import admin
 from django.forms import ModelForm
 from django import forms
@@ -14,7 +14,7 @@ class ClipForm(ModelForm):
     class Meta:
         '''Build on clip model to create the form.'''
         model = Clip
-        fields = ('filebits', 'date', 'location', 'tags', 'description')
+        fields = ('title', 'description')
 
     taglist = forms.CharField(required=False, help_text='Insert a comma delimited list of descriptive terms for your item.')
 
@@ -61,8 +61,23 @@ class ClipForm(ModelForm):
 
         return self.cleaned_data
 
+class FileElementsInline(admin.StackedInline):
+    '''Create an inline choice for associated file to clip form.'''
+    model = FileElement
+    max_num = 1
+
+class LocationInline(admin.StackedInline):
+    '''Create inline choice for location.'''
+    model = Location
+    extra = 1
+
 class ClipAdmin(admin.ModelAdmin):
-    '''Setup our custom form with the admin interface.''' 
+    '''Setup our clip views and custom form with the admin interface.'''
+    list_display = ('title', 'upload_date',)
+    search_fields = ['title', 'tags', 'description',]
+    list_filter = ['user', 'location', 'tags', 'upload_date']
+    
     form = ClipForm
+    inlines =  [FileElementsInline, LocationInline]
  
 admin.site.register(Clip, ClipAdmin)

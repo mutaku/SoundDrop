@@ -7,3 +7,5 @@ local_settings.py
 *.*-journal
 .fb_access_token
 *.m4*
+*.jpg
+recordings/

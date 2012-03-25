@@ -32,16 +32,15 @@ class ClipForm(ModelForm):
 
     def clean(self):
         '''Custom cleaning to override specific fields.'''
-        super(ClipForm, self).clean()        
-        # --> Hmm, may need to explicity run the description and location clean
-        self.cleaned_data['description'] = self.clean_description
+        cleaned_data = super(ClipForm, self).clean()        
+        self.cleaned_data['description'] = self.clean_description()
 
         return self.cleaned_data
 
 class ClipAdmin(admin.ModelAdmin):
     '''Setup our clip views and custom form with the admin interface.'''
     list_display = ('title', 'upload_date',)
-    search_fields = ['title', 'tags', 'description',]
+    search_fields = ['title', 'description',]
     list_filter = ['user', 'location', 'tags', 'upload_date']
     
     form = ClipForm

@@ -3,6 +3,7 @@
 # -*- coding: utf_8 -*-
 
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Clip(models.Model):
@@ -10,7 +11,7 @@ class Clip(models.Model):
     title = models.CharField('Name', help_text='Choose a name for clip', max_length=75)
     record_date = models.DateTimeField('Date recorded', help_text='Indicate date of recording')
     location = models.ManyToManyField('Location', help_text='Indicate location(s) represented in clip.')
-    user = models.CharField('User', editable=False, max_length=20, null=True)
+    user = models.ForeignKey(User, editable=False, blank=True, null=True)
     tags = models.ManyToManyField('Tags', help_text='Tag recordinging with relevent strings.')
     description = models.TextField('Description', help_text='Describe recording for searchable reference', null=True)
     

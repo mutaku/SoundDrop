@@ -16,8 +16,11 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     
+    # show the index from /
+    url(r'^$', 'sounds.views.main'),
+
     # Temporary serving of media when using built-in django server in Debug mode
-    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
-            'document_root': settings.MEDIA_ROOT,
+    url(r'^recordings/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT+'recordings',
         }),
 )

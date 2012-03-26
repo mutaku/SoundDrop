@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class=header>
+		<h1>Nature Mecanique</h1>
+		<h2>A life through sounds.</h2>
+		<div class=sub-info>
+			<p>Click to play.</p>
+	</div>
+
+{% if clips %}
+    <p class=lister>Sounds...</p>
+    <table>
+    {% for clip in clips %}
+		<tr>
+			<td class="tablelink"><a target=_blank href="{{ clip.name }}">{{ clip.title|title }}</a></td>
+			<td class="tabledesc">recorded : {{ clip.record_date }}</td>
+			<td class="tabledesc">location : {% for loc in clip.location.all %}{{ loc|title }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
+			<td class="tabledesc">description : {{ clip.description|safe|escape }}</td>
+		</tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No clips to display.</p>
+{% endif %}
+
+{% endblock %}

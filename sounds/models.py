@@ -15,7 +15,7 @@ class Clip(models.Model):
     tags = models.ManyToManyField('Tags', help_text='Tag recordinging with relevent strings.')
     description = models.TextField('Description', help_text='Describe recording for searchable reference', null=True)
     
-    name = models.FileField('Recording', help_text='Select recording file to upload', upload_to='recordings/%Y/%m/%d',)
+    name = models.FileField('Recording', help_text='Select recording file to upload', upload_to='recordings/',)
     size = models.IntegerField('File size', editable=False, null=True)
     length = models.IntegerField('File length', editable=False, null=True)
     upload_date = models.DateTimeField('Date uploaded', auto_now=True, editable=False,)

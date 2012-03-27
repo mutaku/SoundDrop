@@ -2,11 +2,19 @@
         <title>Nature Mecanique</title>
         <link rel="icon" type="image/png" href="">
 	<link rel="stylesheet" type="text/css" href="/static/style.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/inlineplayer.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/flashblock.css" />
+	<script type="text/javascript" src="/static/script/soundmanager2-nodebug-jsmin.js"></script>
+	<script type="text/javascript" src="/static/script/inlineplayer.js"></script>
+
 </head>
 
 {% autoescape on %}
 
 <body>
+	<div id="sm2-container">
+		<!-- SM2 flash goes here -->
+	</div>
 
 {% block content %}
 

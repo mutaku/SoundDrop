@@ -5,21 +5,19 @@
 		<h1>Nature Mecanique</h1>
 		<h2>A life through sounds.</h2>
 		<div class=sub-info>
-			<p>Click to play.</p>
 	</div>
 
 {% if clips %}
-    <p class=lister>Sounds...</p>
-    <table>
+	<ul class="flat">
     {% for clip in clips %}
-		<tr>
-			<td class="tablelink"><a target=_blank href="{{ clip.name }}">{{ clip.title|title }}</a></td>
-			<td class="tabledesc">recorded : {{ clip.record_date }}</td>
-			<td class="tabledesc">location : {% for loc in clip.location.all %}{{ loc|title }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
-			<td class="tabledesc">description : {{ clip.description|safe|escape }}</td>
-		</tr>
+		<li>
+			<span class="tablelink"><a target=_blank href="{{ clip.name }}">{{ clip.title|title }}</a></span>
+			<span class="tabledesc">{{ clip.record_date }}</span>
+			<span class="tabledesc">{% for loc in clip.location.all %}{{ loc|title }}{% if not forloop.last %}, {% endif %}{% endfor %}</span>
+			<span class="tabledesc">{{ clip.description|safe|escape }}</span>
+		</li>
     {% endfor %}
-    </table>
+	</ul>
 {% else %}
     <p>No clips to display.</p>
 {% endif %}

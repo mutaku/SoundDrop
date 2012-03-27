@@ -36,7 +36,7 @@ class ClipForm(ModelForm):
         cleaned_data = super(ClipForm, self).clean()        
         self.cleaned_data['description'] = self.clean_description()
         _content_types = ['audio']
-        if self.cleaned_data['name'].content_type.split('/')[0] not in _content_types:
+        if hasattr(self.cleaned_data['name'], 'content_type') and self.cleaned_data['name'].content_type.split('/')[0] not in _content_types:
             raise forms.ValidationError("File not of audio type")
     
         return self.cleaned_data

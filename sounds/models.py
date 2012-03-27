@@ -16,8 +16,9 @@ class Clip(models.Model):
     description = models.TextField('Description', help_text='Describe recording for searchable reference', null=True)
     
     name = models.FileField('Recording', help_text='Select recording file to upload', upload_to='recordings/',)
-    size = models.IntegerField('File size', editable=False, null=True)
-    length = models.IntegerField('File length', editable=False, null=True)
+    size = models.IntegerField('File size (bytes)', editable=False, null=True)
+    length = models.FloatField('File length (seconds)', editable=False, null=True)
+    audio_type = models.CharField('File format', editable=False, null=True, max_length=15)
     upload_date = models.DateTimeField('Date uploaded', auto_now=True, editable=False,)
     
     def __unicode__(self):

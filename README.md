@@ -5,5 +5,5 @@ Uses:
 
 ```
   mutagen
-  soundmanager2
+  soundmanager2 (included)
 ```
